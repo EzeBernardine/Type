@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 import { IState as IProps } from "../App";
 
 const List: React.FC<IProps> = ({ people }) => {
-  const renderList = (): JSX.Element[]   => {
+  const renderList = (): JSX.Element[] => {
     return people.map((person) => (
       <li className="List">
         <div className="List-header">
