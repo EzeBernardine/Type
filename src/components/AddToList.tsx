@@ -3,10 +3,10 @@ import { IState as Props } from "../App";
 
 interface IProps {
   people: Props["people"];
-  setPeople: React.Dispatch<React.SetStateAction<Props["people"]>>;
+  setState: React.Dispatch<React.SetStateAction<Props>>;
 }
 
-const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
+const AddToList: React.FC<IProps> = ({ people, setState }) => {
   const [input, setInput] = useState({
     name: "",
     age: "",
@@ -17,22 +17,25 @@ const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setInput({ ...input, [e.target.name]: e.target.value.trim() });
+    setInput({ ...input, [e.target.name]: e.target.value});
   };
 
   const handleCLick = () => {
     if (!input.name || !input.age || !input.url) {
       return;
     }
-    setPeople([
-      ...people,
-      {
-        name: input.name,
-        age: +input.age,
-        url: input.url,
-        note: input.note,
-      },
-    ]);
+    setState((prev) => ({
+      ...prev,
+      people: [
+        ...people,
+        {
+          name: input.name,
+          age: +input.age,
+          url: input.url,
+          note: input.note,
+        },
+      ],
+    }));
     setInput({
       name: "",
       age: "",
@@ -47,7 +50,7 @@ const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
         className="AddToList-input"
         value={input.name}
         name="name"
-        placeholder='Name'
+        placeholder="Name"
         onChange={handleChange}
       />
       <input
@@ -55,7 +58,7 @@ const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
         className="AddToList-input"
         value={input.age}
         name="age"
-        placeholder='Age'
+        placeholder="Age"
         onChange={handleChange}
       />
       <input
@@ -63,13 +66,13 @@ const AddToList: React.FC<IProps> = ({ people, setPeople }) => {
         className="AddToList-input"
         value={input.url}
         name="url"
-        placeholder='Image url'
+        placeholder="Image url"
         onChange={handleChange}
       />
       <textarea
         className="AddToList-input"
         value={input.note}
-        placeholder='Note'
+        placeholder="Note"
         onChange={handleChange}
         name="note"
       />
