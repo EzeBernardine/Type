@@ -49,12 +49,12 @@ const List: React.FC<Props> = ({ people, setState, confirmed }) => {
           <button
             className="List-delete-btn"
             onClick={() =>
-              str === "confirmed"
+              str === "Confirm"
                 ? handleRemovePerson(index)
                 : handleUnConfirmPerson(index)
             }
           >
-            {str === "confirmed" ? "Remove" : "Unconfirmed"}
+            {str === "Confirm" ? "Remove" : "Unconfirm"}
           </button>
         </div>
       </li>
@@ -67,7 +67,7 @@ const List: React.FC<Props> = ({ people, setState, confirmed }) => {
       {people.length ? (
         <>
           <h3 className="info txt-start">All listed persons </h3>
-          {renderList(people, "confirmed")}
+          {renderList(people, "Confirm")}
         </>
       ) : null}
 
